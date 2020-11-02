@@ -36,5 +36,6 @@ export default class CustomTextField extends Vue {
 
     @Ref('input')
     readonly inputRef!: HTMLInputElement
+
 }
 </script>

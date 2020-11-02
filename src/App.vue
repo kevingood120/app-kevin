@@ -57,7 +57,17 @@ export default class App extends Vue {
         {
             title: 'Produto',
             to: '/product',
-            icon: 'fa-users'
+            icon: 'fa-hdd'
+        },
+        {
+            title: 'Endereço',
+            to: '/address',
+            icon: 'fas fa-map-marker-alt'
+        },
+        {
+            title: 'Serviços',
+            to: '/task',
+            icon: 'fa-cog'
         }
     ]
 }

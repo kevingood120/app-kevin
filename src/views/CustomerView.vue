@@ -12,7 +12,10 @@
         >
         <template v-slot:item.address="{ item }">
             {{item.address.street}}, {{item.addressNumber}}
-        </template>   
+        </template>
+        <template v-slot:item.createdAt="{ item }">
+            {{item.createdAt | format-date}}
+        </template>      
         <template v-slot:item.actions="{ item }">
             <v-btn icon @click="onEdit(item)" fab x-small>
                 <v-icon v-text="'fa-pen'"/>
@@ -38,7 +41,7 @@
                         <v-icon v-text="'fa-times'"></v-icon>
                     </v-btn>
                 </v-toolbar>
-                <validation-observer mode="" ref="observer" slim v-slot="{ handleSubmit, invalid }">
+                <validation-observer ref="observer" slim v-slot="{ handleSubmit, invalid }">
                     <v-form autocomplete="off" @submit.prevent="handleSubmit(onSubmit)">
                         <v-container fluid>
                             <v-row dense>
@@ -128,7 +131,11 @@ export default class CustomerView extends Vue {
             required: true,
             length: 14,
             cpf: true,
-            cpfUnique: this.customer.id,
+            unique: {
+                service: this.customerService,
+                field: 'cpf',
+                id: this.customer.id
+            }
         }
     }
 
@@ -136,7 +143,11 @@ export default class CustomerView extends Vue {
         return {
             required: true,
             email: true,
-            emailUnique: this.customer.id
+            unique: {
+                service: this.customerService,
+                field: 'email',
+                id: this.customer.id
+            }
         }
     }
 
@@ -152,6 +163,10 @@ export default class CustomerView extends Vue {
         {
             text: 'Nome',
             value: 'name',
+        },
+        {
+            text: 'Criado em',
+            value: 'createdAt'
         },
         {
             text: 'Email',

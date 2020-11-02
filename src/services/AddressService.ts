@@ -21,14 +21,16 @@ export class AddressService implements Service<IAddress> {
         throw new Error('Method not implemented.')
     }
     async findAllPagination(query: Query<IAddress>): Promise<PaginationData<IAddress>> {
-        throw new Error('Method not implemented.')
-    }
-    async findOne(query: Partial<IAddress>): Promise<IAddress> {
-        const { data, config } = await this.http.get('address/filter', {
+        const { data } = await this.http.get('address', {
             params: query
         })
 
-        console.log(config.baseURL)
+        return data
+    }
+    async findOne(query: Partial<IAddress>): Promise<IAddress> {
+        const { data } = await this.http.get('address/findOne', {
+            params: query
+        })
         return data
 
     }

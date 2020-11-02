@@ -25,6 +25,7 @@ export interface ICustomer {
     comments: string
     complement: string
     address: IAddress
+    createdAt: Date
 }
 
 export interface IBrand {
@@ -41,6 +42,13 @@ export interface IProduct {
     brand?: IBrand
     purchasePrice: number
     salePrice: number
+    createdAt: Date
+}
+
+export interface ITask {
+    id?: string
+    desc: string
+    price: number
 }
 
 

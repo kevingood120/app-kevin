@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import CustomerView from '@/views/CustomerView.vue'
 import ProductView from '@/views/ProductView.vue'
+import AddressView from '@/views/AddressView.vue'
+import TaskView from '@/views/TaskView.vue'
 
 Vue.use(VueRouter);
 
@@ -13,6 +15,14 @@ const routes: Array<RouteConfig> = [
   {
     path: '/product',
     component: ProductView
+  },
+  {
+    path: '/address',
+    component: AddressView
+  },
+  {
+    component: TaskView,
+    path: '/task'
   }
 ];
 

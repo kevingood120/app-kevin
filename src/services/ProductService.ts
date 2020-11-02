@@ -11,6 +11,7 @@ export class ProductService implements Service<IProduct> {
     }
 
     async add(values: IProduct): Promise<IProduct> {
+        console.log(values)
         return (await this.http.post('product', values)).data
     }
     async update(id: string, values: IProduct): Promise<IProduct> {
@@ -19,8 +20,8 @@ export class ProductService implements Service<IProduct> {
     async findAllPagination(query: Query<IProduct>): Promise<PaginationData<IProduct>> {
         return (await this.http.get('product', { params: query })).data
     }
-    findOne(query: Partial<IProduct>): Promise<IProduct> {
-        throw new Error('Method not implemented.');
+    async findOne(query: Partial<IProduct>): Promise<IProduct> {
+        return (await this.http.get('product/findOne', { params: query })).data
     }
 
 }

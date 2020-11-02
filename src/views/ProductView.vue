@@ -12,10 +12,19 @@
             <template v-slot:item.unit="{ item }">
                 {{getUnit(item.unit)}}
             </template>
+            <template v-slot:item.purchasePrice="{ item }">
+                {{item.purchasePrice | currency}}
+            </template>
+            <template v-slot:item.salePrice="{ item }">
+                {{item.salePrice | currency}}
+            </template>
             <template v-slot:item.actions="{ item }">
                 <v-btn icon @click="onEdit(item)" fab x-small>
                     <v-icon v-text="'fa-pen'"/>
                 </v-btn>
+            </template> 
+            <template v-slot:item.createdAt="{ item }">
+                {{item.createdAt | format-date}}
             </template> 
         </v-data-table>
         <v-dialog
@@ -48,10 +57,10 @@
                                     <v-select return-object item-text="desc" v-model="product.brand" item-value="id" :items="brands" label="Marca"></v-select>
                                 </v-col>
                                 <v-col cols="6">
-                                    <custom-text-field prefix="R$" v-model="product.purchasePrice" label="Preço de compra"></custom-text-field>
+                                    <money-text-field v-model.number="product.purchasePrice" label="Preço de compra"></money-text-field>
                                 </v-col>
                                 <v-col cols="6">
-                                    <custom-text-field prefix="R$" v-model="product.salePrice" label="Preço de venda"></custom-text-field>
+                                    <money-text-field v-model.number="product.salePrice" label="Preço de venda"></money-text-field>
                                 </v-col>
                                 <v-col cols="12">
                                     <v-select label="Medida" v-model="product.unit" :items="units"/>
@@ -106,6 +115,10 @@ export default class ProductView extends Vue {
         {
             text: 'Marca',
             value: 'brand.desc'
+        },
+        {
+            text: 'Criado em',
+            value: 'createdAt'
         },
         {
             text: 'Preço de compra',
@@ -173,8 +186,6 @@ export default class ProductView extends Vue {
             page: this.pagination.page,
             limit: this.pagination.itemsPerPage
         })
-
-        console.table({rows, meta})
 
         this.items = rows
         this.serverSideTotal = meta.totalRows
