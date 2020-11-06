@@ -8,7 +8,7 @@ export class ProductGroupService implements Service<IProductGroup> {
     constructor() {
         this.http = http
     }
-    add(values: IProductGroup): Promise<IProductGroup> {
+    save(values: IProductGroup): Promise<IProductGroup> {
         throw new Error('Method not implemented.');
     }
     update(id: string, values: IProductGroup): Promise<IProductGroup> {

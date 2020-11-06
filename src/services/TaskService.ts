@@ -11,7 +11,7 @@ export class TaskService implements Service<ITask> {
         this.http = http
     }
 
-    async add(values: ITask): Promise<ITask> {
+    async save(values: ITask): Promise<ITask> {
         return (await this.http.post('task', values)).data
     }
     update(id: string, values: ITask): Promise<ITask> {

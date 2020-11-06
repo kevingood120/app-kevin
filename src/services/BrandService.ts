@@ -10,7 +10,7 @@ export class BrandService implements Service<IBrand> {
     }
 
     http: AxiosInstance;
-    async add(values: IBrand): Promise<IBrand> {
+    async save(values: IBrand): Promise<IBrand> {
         return (await this.http.post('brand', values)).data
     }
 

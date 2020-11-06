@@ -13,7 +13,7 @@ export class AddressService implements Service<IAddress> {
 
     http: AxiosInstance
 
-    async add(values: IAddress): Promise<IAddress> {
+    async save(values: IAddress): Promise<IAddress> {
         const { data } = await this.http.post('address', values)
         return data
     }

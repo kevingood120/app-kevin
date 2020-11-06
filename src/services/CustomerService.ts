@@ -18,7 +18,7 @@ export class CustomerService implements Service<ICustomer> {
         return response.data
     }
     
-    async add(values: ICustomer): Promise<ICustomer> {
+    async save(values: ICustomer): Promise<ICustomer> {
         const response = await this.http.post<ICustomer>('/customer', values)
         return response.data
     }
