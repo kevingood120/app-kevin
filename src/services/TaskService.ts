@@ -24,7 +24,7 @@ export class TaskService implements Service<ITask> {
         return (await this.http.get('task/findOne', { params: query })).data
     }
 
-    async findAll(query: ITask) {
+    async findAll(query: Partial<ITask>) {
         return (await this.http.get('task', {
             params: {
                 desc: query.desc || ''

@@ -8,6 +8,15 @@
         v-on="$listeners"
     >
     </v-textarea>
+    <v-select
+        v-else-if="$attrs.type === 'select'"
+        ref="input"
+        :error-messages="errors"
+        v-bind="$attrs"
+        v-on="$listeners"
+    >
+        
+    </v-select>
     <v-text-field
         v-else
         ref="input"
@@ -15,6 +24,7 @@
         v-bind="$attrs"
         v-on="$listeners"
     ></v-text-field>
+
   </ValidationProvider>
 </template>
 

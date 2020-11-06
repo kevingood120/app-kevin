@@ -33,6 +33,11 @@ export interface IBrand {
     desc: string
 }
 
+export interface IProductGroup {
+    id?: string
+    desc: string
+}
+
 export interface IProduct {
     id?: string
     desc: string
@@ -40,6 +45,7 @@ export interface IProduct {
     minStock: number
     unit: number
     brand?: IBrand
+    productGroup?: IProductGroup
     purchasePrice: number
     salePrice: number
     createdAt: Date

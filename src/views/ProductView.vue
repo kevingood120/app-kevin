@@ -54,16 +54,19 @@
                                     <custom-text-field v-model="product.desc" label="Descrição"></custom-text-field>
                                 </v-col>
                                 <v-col cols="12">
-                                    <v-select return-object item-text="desc" v-model="product.brand" item-value="id" :items="brands" label="Marca"></v-select>
-                                </v-col>
-                                <v-col cols="6">
-                                    <money-text-field v-model.number="product.purchasePrice" label="Preço de compra"></money-text-field>
-                                </v-col>
-                                <v-col cols="6">
-                                    <money-text-field v-model.number="product.salePrice" label="Preço de venda"></money-text-field>
+                                    <custom-text-field type="select" return-object item-text="desc" v-model="product.brand" item-value="id" :items="brands" label="Marca"></custom-text-field>
                                 </v-col>
                                 <v-col cols="12">
-                                    <v-select label="Medida" v-model="product.unit" :items="units"/>
+                                    <custom-text-field type="select" return-object item-text="desc" v-model="product.productGroup" item-value="id" :items="productGroups" label="Grupos"></custom-text-field>
+                                </v-col>
+                                <v-col cols="6">
+                                    <money-text-field v-model="product.purchasePrice" label="Preço de compra"></money-text-field>
+                                </v-col>
+                                <v-col cols="6">
+                                    <money-text-field v-model="product.salePrice" label="Preço de venda"></money-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                    <custom-text-field type="select" label="Medida" v-model="product.unit" :items="units"/>
                                 </v-col>
                                 <v-col cols="6">
                                     <custom-text-field v-model.number="product.stock" type="number" label="Estoque"></custom-text-field>
@@ -82,11 +85,12 @@
 </template>
 
 <script lang="ts">
-import { IBrand, IProduct, Units } from '@/types'
+import { IBrand, IProduct, IProductGroup, Units } from '@/types'
 import { Vue, Component, Watch, Ref } from 'vue-property-decorator'
 import { DataPagination, DataTableHeader } from 'vuetify'
 import {
     BrandService,
+    ProductGroupService,
     ProductService
 } from '@/services'
 
@@ -106,8 +110,13 @@ export default class ProductView extends Vue {
 
     brandService = new BrandService()
     productService = new ProductService()
+    productGroupService = new ProductGroupService()
 
     headers: DataTableHeader[] = [
+        {
+            text: 'Grupo',
+            value: 'productGroup.desc'
+        },
         {
             text: 'Descrição',
             value: 'desc'
@@ -153,6 +162,7 @@ export default class ProductView extends Vue {
 
     dialog = false
     brands: IBrand[] = []
+    productGroups: IProductGroup[] = []
     units = Units
     items: IProduct[] = []
     pagination: DataPagination = { } as DataPagination
@@ -202,6 +212,7 @@ export default class ProductView extends Vue {
 
     async created() {
         this.brands = await this.brandService.findAll()
+        this.productGroups =  await this.productGroupService.findAll()
     }
 
 

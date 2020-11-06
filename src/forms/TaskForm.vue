@@ -82,7 +82,7 @@ export default class TaskForm extends Vue {
     }
 
     reset() {
-        this._task = { }   
+        this._task = { } as ITask
         this.observerRef.reset()
     }
 
